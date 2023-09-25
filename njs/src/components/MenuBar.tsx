@@ -28,24 +28,24 @@ export default () => {
         Haloween <span className="text-red-700">X</span> Inorog{" "}
         <span ref={emoji}>🦄</span>
       </h3>
-      <div>
+      <div className="flex">
         <Link
           className="px-1.5 hover:text-orange-5100 sm:border-white hover:text-orange-600"
           href={""}
         >
-          Scrie
+          <p className="p-3 sm:p-0">Scrie</p>
         </Link>
         <Link
           className="px-1.5 hover:text-orange-5100 sm:border-white hover:text-orange-600"
           href={""}
         >
-          Mesaje
+          <p className="p-3 sm:p-0">Mesaje</p>
         </Link>
         <Link
           className="px-1.5 hover:text-orange-5100 sm:border-white hover:text-orange-600"
           href={""}
         >
-          Cont
+          <p className="p-3 sm:p-0">Cont</p>
         </Link>
       </div>
     </nav>
