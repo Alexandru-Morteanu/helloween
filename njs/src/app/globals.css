@@ -7,3 +7,6 @@ body {
   color: white;
   background-color: #0b0b0b;
 }
+input {
+  outline: none;
+}

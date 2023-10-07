@@ -13,6 +13,11 @@ export default () => {
       emoji.current.textContent = "🦄";
     }
   };
+  const MenuButtons: { text: string; link: string }[] = [
+    { text: "Write", link: "" },
+    { text: "Messages", link: "" },
+    { text: "Account", link: "" },
+  ];
   return (
     <nav
       className="flex sm:flex-row sm:pe-3 flex-col items-center justify-between"
@@ -25,28 +30,21 @@ export default () => {
         onMouseOver={MouseOnLogo}
         onMouseLeave={MouseOffLogo}
       >
-        Haloween <span className="text-red-700">X</span> Inorog{" "}
+        Halloween <span className="text-red-700">X</span> Inorog
         <span ref={emoji}>🦄</span>
       </h3>
       <div className="flex">
-        <Link
-          className="px-1.5 hover:text-orange-5100 sm:border-white hover:text-orange-600"
-          href={""}
-        >
-          <p className="p-3 sm:p-0">Scrie</p>
-        </Link>
-        <Link
-          className="px-1.5 hover:text-orange-5100 sm:border-white hover:text-orange-600"
-          href={""}
-        >
-          <p className="p-3 sm:p-0">Mesaje</p>
-        </Link>
-        <Link
-          className="px-1.5 hover:text-orange-5100 sm:border-white hover:text-orange-600"
-          href={""}
-        >
-          <p className="p-3 sm:p-0">Cont</p>
-        </Link>
+        {MenuButtons.map((button, index) => {
+          return (
+            <Link
+              key={index}
+              className=" px-2 hover:text-orange-5100 sm:border-white hover:text-red-600 font-serif"
+              href={button.link}
+            >
+              <p className="p-3 sm:p-0">{button.text}</p>
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );

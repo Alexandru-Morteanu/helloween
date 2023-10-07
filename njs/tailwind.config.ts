@@ -16,6 +16,9 @@ const config: Config = {
       colors: {
         "dark-matters-here": "#0b0b0b",
       },
+      width: {
+        w50: "50%",
+      },
     },
   },
   plugins: [],
