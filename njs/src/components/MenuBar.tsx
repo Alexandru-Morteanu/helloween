@@ -38,7 +38,7 @@ export default () => {
           return (
             <Link
               key={index}
-              className=" px-2 hover:text-orange-5100 sm:border-white hover:text-red-600 font-serif"
+              className="px-2 hover:transition-colors hover:text-orange-5100 sm:border-white hover:text-red-600 font-serif"
               href={button.link}
             >
               <p className="p-3 sm:p-0">{button.text}</p>

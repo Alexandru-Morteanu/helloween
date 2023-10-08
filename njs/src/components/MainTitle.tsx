@@ -5,7 +5,7 @@ export default function MainTitle() {
         Halloween Story Challenge
       </h1>
       <div className="border border-red-600 border-solid max-w-full"></div>
-      <span className="text-red-600 text-sm text-center p-2">
+      <span className="text-red-600 text-center p-2 text-xs">
         by Inorog Team!
       </span>
     </div>
