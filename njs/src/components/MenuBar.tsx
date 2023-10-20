@@ -26,7 +26,6 @@ export default () => {
       <h3
         className="text-2xl font-serif hover:text-red-600 hover:animate-pulse transition-colors 
         duration-1000 text-white text-left m-2"
-        style={{ fontFamily: "'Roboto Slab', serif" }}
         onMouseOver={MouseOnLogo}
         onMouseLeave={MouseOffLogo}
       >

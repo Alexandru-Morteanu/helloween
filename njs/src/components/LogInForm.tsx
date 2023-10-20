@@ -8,9 +8,17 @@ const LogInForm: React.FC = () => {
     username: string;
     password: string;
   }
+  interface wrongData {
+    possible: boolean;
+    message: string;
+  }
   const [userData, SetUserData] = useState<userData>({
     username: "",
     password: "",
+  });
+  const [wrongDataMsg, setWrongDataMsg] = useState<wrongData>({
+    possible: false,
+    message: "It's spooki time!",
   });
 
   const ChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,25 +33,55 @@ const LogInForm: React.FC = () => {
     e.preventDefault();
     console.log(userData);
     try {
-      await axios.post("/api", userData).then((response) => {
+      await axios.post("/api/login", userData).then((response) => {
         if (response.data.success) {
-          console.log(response.data.message);
+          setWrongDataMsg({
+            possible: true,
+            message: `Welcome ${userData.username}!`,
+          });
         } else {
-          console.log(response.data.message);
+          setWrongDataMsg({ possible: true, message: response.data.message });
         }
       });
-    } catch (error) {
-      console.log("There was an error while checking the data!");
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        setWrongDataMsg({
+          possible: true,
+          message: error.response.data.message,
+        });
+      } else if (error.request) {
+        console.log("R.I.P servers 🍮");
+        setWrongDataMsg({ possible: true, message: "Server's on vacation 🏖️" });
+      } else {
+        console.log("An error occurred while sending the request.");
+        setWrongDataMsg({
+          possible: true,
+          message: "Damn...Code broke...Contact an admin!",
+        });
+      }
     }
   };
-
   return (
     <div className="flex self-center flex-col">
       <form
         onSubmit={SubmitEvent}
-        className="sm:p-4 p-6 rounded-lg shadow-lg w-96"
+        className="sm:p-4 p-4 rounded-lg shadow-lg w-96"
       >
-        <h2 className="text-2xl font-semibold text-orange-700 mb-6">Login</h2>
+        <div className="flex flex-col items-center">
+          <h2 className="text-2xl font-semibold mb-2 flex flex-row ">
+            🎃 Login
+          </h2>
+          <p
+            className="text-red-700 text-xs"
+            style={
+              !wrongDataMsg.possible ? { opacity: "0%" } : { opacity: "100%" }
+            }
+          >
+            {/* {(wrongDataMsg.possible && wrongDataMsg.message)} */}
+            {wrongDataMsg.message}
+          </p>
+        </div>
         <div>
           <label
             className="block text-white text-sm font-medium mb-2"
