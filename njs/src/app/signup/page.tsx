@@ -52,7 +52,7 @@ export default () => {
       e.preventDefault();
       try {
         await axios
-          .post("/api/login", userData, { withCredentials: true })
+          .post("/api/signup", userData, { withCredentials: true })
           .then((response) => {
             if (response.data.success) {
               setErrorMessage({
@@ -133,7 +133,7 @@ export default () => {
         >
           <div className="flex flex-col items-center">
             <h2 className="text-2xl font-semibold mb-2 flex flex-row ">
-              {"\u{1F383} Login"}
+              {"\u{1F383} SignUp"}
             </h2>
             <p
               className="text-red-700 text-xs"
@@ -156,7 +156,7 @@ export default () => {
               type="text"
               id="username"
               onChange={handleChangeEvent}
-              placeholder="Username"
+              placeholder="username"
               required
             />
           </div>
@@ -173,7 +173,7 @@ export default () => {
               type="password"
               id="password"
               onChange={handleChangeEvent}
-              placeholder="Password"
+              placeholder="password"
               required
             />
           </div>
@@ -183,14 +183,14 @@ export default () => {
               className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300"
               type="submit"
             >
-              Login
+              SignUp
             </button>
           </div>
 
           <p className="text-gray-400 text-sm text-center">
-            Don't have an account?{" "}
-            <Link className="text-red-500 hover:underline" href="/signup">
-              Get One Now!
+            Already have an account?{" "}
+            <Link className="text-red-500 hover:underline" href="/login">
+              Log In Now!
             </Link>
           </p>
         </form>

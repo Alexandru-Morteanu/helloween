@@ -6,6 +6,6 @@ const StorySchema = new Schema({
 });
 // story => collection name!
 // MongoDB will make a new collection automatically named stories!
-const Story = mongoose.models.LogIn || mongoose.model("story", StorySchema);
+const Story = mongoose.models.story || mongoose.model("story", StorySchema);
 
 export default Story;

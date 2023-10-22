@@ -6,6 +6,6 @@ const LogInSchema = new Schema({
 });
 // users => collection name!
 // MongoDB will make a new collection automatically named users!
-const LogIn = mongoose.models.LogIn || mongoose.model("users", LogInSchema);
+const LogIn = mongoose.models.users || mongoose.model("users", LogInSchema);
 
 export default LogIn;
