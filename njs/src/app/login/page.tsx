@@ -20,7 +20,7 @@ interface UserResponse {
   user: string | null | AxiosResponse;
 }
 
-export default () => {
+export default function login() {
   //consts/data
   const [loading, setLoading] = useState<Boolean>(true);
   const router = useRouter();
@@ -188,7 +188,7 @@ export default () => {
           </div>
 
           <p className="text-gray-400 text-sm text-center">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link className="text-red-500 hover:underline" href="/signup">
               Get One Now!
             </Link>
@@ -197,4 +197,4 @@ export default () => {
       </div>
     </main>
   );
-};
+}

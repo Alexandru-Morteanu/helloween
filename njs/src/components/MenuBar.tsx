@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRef } from "react";
-export default () => {
+export default function MenuBar() {
   const emoji = useRef<HTMLSpanElement | null>(null);
   const MouseOnLogo = () => {
     if (emoji.current) {
@@ -49,4 +49,4 @@ export default () => {
       </div>
     </nav>
   );
-};
+}

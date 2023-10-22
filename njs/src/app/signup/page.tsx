@@ -20,7 +20,7 @@ interface UserResponse {
   user: string | null | AxiosResponse;
 }
 
-export default () => {
+export default function signup() {
   //consts/data
   const [loading, setLoading] = useState<Boolean>(true);
   const router = useRouter();
@@ -197,4 +197,4 @@ export default () => {
       </div>
     </main>
   );
-};
+}
