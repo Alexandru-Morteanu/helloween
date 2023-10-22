@@ -1,9 +1,11 @@
 "use client";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import Link from "next/link";
-import { useState, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useState, ChangeEvent, useEffect } from "react";
 
-const LogInForm: React.FC = () => {
+export default () => {
+  //Interfaces
   interface userData {
     username: string;
     password: string;
@@ -12,15 +14,19 @@ const LogInForm: React.FC = () => {
     possible: boolean;
     message: string;
   }
+
+  //consts/data
   const [userData, SetUserData] = useState<userData>({
     username: "",
     password: "",
   });
+
   const [wrongDataMsg, setWrongDataMsg] = useState<wrongData>({
     possible: false,
     message: "It's spooki time!",
   });
 
+  //Functions
   const ChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     SetUserData((prevContent: any) => ({
@@ -28,36 +34,38 @@ const LogInForm: React.FC = () => {
       [id]: value,
     }));
   };
-
+  /*
+  - Get the value of each input using the id and matching it with the "UserData".
+  - Automatically doing the value attribution. Use name (only for inputs) instead
+   of id if you want that.
+  */
   const SubmitEvent = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(userData);
     try {
-      await axios.post("/api/login", userData).then((response) => {
-        if (response.data.success) {
-          setWrongDataMsg({
-            possible: true,
-            message: `Welcome ${userData.username}!`,
-          });
-        } else {
-          setWrongDataMsg({ possible: true, message: response.data.message });
-        }
-      });
+      await axios
+        .post("/api/login", userData, { withCredentials: true })
+        .then((response) => {
+          if (response.data.success) {
+            setWrongDataMsg({
+              possible: true,
+              message: `Welcome ${userData.username}!`,
+            });
+          } else {
+            setWrongDataMsg({ possible: true, message: response.data.message });
+          }
+        });
     } catch (error: any) {
       if (error.response) {
-        console.log(error.response.data.message);
         setWrongDataMsg({
-          possible: true,
-          message: error.response.data.message,
+          possible: true, //Possible helps to know if the operation was possible from an error
+          message: error.response.data.message, //The actually req.error message who was implemented in the backend
         });
       } else if (error.request) {
-        console.log("R.I.P servers 🍮");
-        setWrongDataMsg({ possible: true, message: "Server's on vacation 🏖️" });
+        setWrongDataMsg({ possible: true, message: "Server's on vacation 🏖️" }); //No response at all
       } else {
-        console.log("An error occurred while sending the request.");
         setWrongDataMsg({
           possible: true,
-          message: "Damn...Code broke...Contact an admin!",
+          message: "Damn...Code broke...Contact an admin!", //Code Broke, Code error
         });
       }
     }
@@ -70,7 +78,7 @@ const LogInForm: React.FC = () => {
       >
         <div className="flex flex-col items-center">
           <h2 className="text-2xl font-semibold mb-2 flex flex-row ">
-            🎃 Login
+            {"\u{1F383} Login"}
           </h2>
           <p
             className="text-red-700 text-xs"
@@ -78,7 +86,6 @@ const LogInForm: React.FC = () => {
               !wrongDataMsg.possible ? { opacity: "0%" } : { opacity: "100%" }
             }
           >
-            {/* {(wrongDataMsg.possible && wrongDataMsg.message)} */}
             {wrongDataMsg.message}
           </p>
         </div>
@@ -135,5 +142,3 @@ const LogInForm: React.FC = () => {
     </div>
   );
 };
-
-export default LogInForm;

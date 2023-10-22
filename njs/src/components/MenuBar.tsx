@@ -23,15 +23,17 @@ export default () => {
       className="flex sm:flex-row sm:pe-3 flex-col items-center justify-between"
       style={{ borderBottom: "0.01em solid rgb(160,160,255)" }}
     >
-      <h3
-        className="text-2xl font-serif hover:text-red-600 hover:animate-pulse transition-colors 
+      <Link href={"/"}>
+        <h3
+          className="text-2xl font-serif hover:text-red-600 hover:animate-pulse transition-colors 
         duration-1000 text-white text-left m-2"
-        onMouseOver={MouseOnLogo}
-        onMouseLeave={MouseOffLogo}
-      >
-        Halloween <span className="text-red-700">X</span> Inorog
-        <span ref={emoji}>🦄</span>
-      </h3>
+          onMouseOver={MouseOnLogo}
+          onMouseLeave={MouseOffLogo}
+        >
+          Halloween <span className="text-red-700">X</span> Inorog
+          <span ref={emoji}>🦄</span>
+        </h3>
+      </Link>
       <div className="flex">
         {MenuButtons.map((button, index) => {
           return (
